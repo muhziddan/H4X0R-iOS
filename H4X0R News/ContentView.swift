@@ -9,13 +9,12 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationView {
+            List(posts) { content in
+                Text(content.title)
+            }
+            .navigationTitle("H4X0R News")
         }
-        .padding()
     }
 }
 
@@ -24,3 +23,14 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+struct DataModel : Identifiable {
+    let id: Int
+    let title: String
+}
+
+let posts = [
+    DataModel(id: 1, title: "Hello"),
+    DataModel(id: 2, title: "how r u"),
+    DataModel(id: 3, title: "fine")
+]
