@@ -7,7 +7,9 @@
 
 import Foundation
 
-struct NetworkManager {
+class NetworkManager: ObservableObject {
+    
+    @Published var observedData = [Item]()
     
     func fetchData() {
         let urlString = "http://hn.algolia.com/api/v1/search?tags=front_page"
@@ -23,7 +25,11 @@ struct NetworkManager {
             
             guard let safeData = data else {return}
             
-            guard let decoded = decode(data: safeData) else {return}
+            guard let decoded = self.decode(data: safeData) else {return}
+            
+            DispatchQueue.main.async {
+                self.observedData = decoded.hits
+            }
         }
         
         task.resume()

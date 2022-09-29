@@ -18,5 +18,5 @@ struct Item : Codable, Identifiable {
     }
     let title: String
     let points: Int
-    let url: String
+    let url: String?
 }
